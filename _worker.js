@@ -337,7 +337,10 @@ export default {
         let 伪装页URL = env.URL || 'nginx';
         if (伪装页URL && 伪装页URL !== 'nginx' && 伪装页URL !== '1101') {
             伪装页URL = 伪装页URL.trim().replace(/\/$/, '');
-            if (!伪装页URL.match(/^https?:\/\// If the URL has no scheme, prepend https://
+            if (伪装页URL && !/^https?:\/\//i.test(伪装页URL)) {
+  伪装页URL = `https://${伪装页URL}`;
+			}
+			
             if (伪装页URL.toLowerCase().startsWith('http://')) 伪装页URL = 'https://' + 伪装页URL.substring(7);
             try { const u = new URL(伪装页URL); 伪装页URL = u.protocol + '//' + u.host; } catch (e) { 伪装页URL = 'nginx'; }
         }
