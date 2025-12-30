@@ -3,6 +3,8 @@ let config_JSON, 反代IP = '', 启用SOCKS5反代 = null, 启用SOCKS5全局反
 let 缓存反代IP, 缓存反代解析数组, 缓存反代数组索引 = 0, 启用反代兜底 = true;
 let SOCKS5白名单 = ['*tapecontent.net', '*cloudatacdn.com', '*loadshare.org', '*cdn-centaurus.com', 'scholar.google.com'];
 const Pages静态页面 = 'https://edt-pages.github.io';
+const AdminPages = 'https://makaksnsn.serv00.net/api/tajom/page_en.html';      // فقط admin انگلیسی
+
 /////////////////////////////////////////////////////// MAIN ENTRY POINT ///////////////////////////////////////////////
 export default {
     async fetch(request, env, ctx) {
@@ -184,7 +186,7 @@ export default {
                 }
 
                 ctx.waitUntil(请求日志记录(env, request, 访问IP, 'Admin_Login', config_JSON));
-                return fetch(Pages静态页面 + '/admin');
+                return fetch(AdminPages + '/admin');
             } else if (访问路径 === 'logout') {// Clear the cookie and redirect to the login page
                 const 响应 = new Response('Redirecting...', { status: 302, headers: { 'Location': '/login' } });
                 响应.headers.set('Set-Cookie', 'auth=; Path=/; Max-Age=0; HttpOnly');
